@@ -2,13 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  FormErrorMessage,
-  FormLabel,
-  FormControl,
-  Input,
-  Button,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 import { MainPageLayout } from "layouts/MainPageLayout";
 import { InputField } from "./common/forms/InputField";

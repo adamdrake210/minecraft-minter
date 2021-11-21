@@ -22,8 +22,10 @@ export const InputField = ({
   type,
 }: InputFieldProps) => {
   return (
-    <FormControl isInvalid={!!error} isRequired>
-      <FormLabel htmlFor={name}>{name}:</FormLabel>
+    <FormControl isInvalid={!!error} isRequired my={4}>
+      <FormLabel htmlFor={name} textTransform="uppercase">
+        {name}:
+      </FormLabel>
       <Input
         id={name}
         type={type}
