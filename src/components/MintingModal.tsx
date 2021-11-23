@@ -11,7 +11,7 @@ import {
   Text,
   Link,
 } from "@chakra-ui/react";
-import { MintingStatusType } from "pages/Homepage/Homepage";
+import { MintingStatusType } from "pages/Minting/Mintingpage";
 
 type MintingModalProps = {
   isOpen: boolean;
