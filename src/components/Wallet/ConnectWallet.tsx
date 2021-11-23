@@ -18,8 +18,6 @@ export const ConnectWallet = () => {
     }
   };
 
-  const handleLogout = () => {};
-
   const addWalletListener = () => {
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", (accounts: any[]) => {
