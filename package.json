@@ -21,6 +21,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.19.5",
     "react-icons": "^3.0.0",
+    "react-location": "^3.2.14",
     "react-scripts": "4.0.3",
     "typescript": "^3.9.5",
     "web-vitals": "^0.2.2",
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-location-devtools": "^3.2.14"
   }
 }

@@ -7,7 +7,7 @@ import { Button } from "@chakra-ui/react";
 import { MainPageLayout } from "layouts/MainPageLayout";
 import { InputField } from "./common/forms/InputField";
 import { mintNFT } from "utils/minting/mintNFT";
-import { MintingStatusType } from "pages/Homepage/Homepage";
+import { MintingStatusType } from "pages/Minting/Mintingpage";
 
 type FormData = {
   image_url: string;
