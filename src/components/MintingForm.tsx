@@ -7,6 +7,7 @@ import { Button } from "@chakra-ui/react";
 import { MainPageLayout } from "layouts/MainPageLayout";
 import { InputField } from "./common/forms/InputField";
 import { mintNFT } from "utils/minting/mintNFT";
+import { MintingStatusType } from "pages/Homepage/Homepage";
 
 type FormData = {
   image_url: string;
@@ -18,7 +19,7 @@ type FormData = {
 };
 
 type MintingFormProps = {
-  setMintingStatus: (arg: string) => void;
+  setMintingStatus: (arg: MintingStatusType) => void;
   onOpen: () => void;
 };
 
@@ -46,14 +47,8 @@ export const MintingForm = ({ setMintingStatus, onOpen }: MintingFormProps) => {
   });
 
   async function onSubmit(values: FormData) {
-    // return new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     alert(JSON.stringify(values, null, 2));
-    //     resolve();
-    //   }, 500);
-    // });
     try {
-      const { status } = await mintNFT({
+      const mintingResponse = await mintNFT({
         image_url: values.image_url,
         name: values.name,
         description: values.description,
@@ -63,7 +58,7 @@ export const MintingForm = ({ setMintingStatus, onOpen }: MintingFormProps) => {
           power: values.power,
         },
       });
-      setMintingStatus(status);
+      setMintingStatus(mintingResponse);
       onOpen();
     } catch (error: any) {
       setMintingStatus(error.message);
@@ -127,7 +122,7 @@ export const MintingForm = ({ setMintingStatus, onOpen }: MintingFormProps) => {
           isLoading={isSubmitting}
           type="submit"
         >
-          Submit
+          Mint NFT
         </Button>
       </form>
     </MainPageLayout>

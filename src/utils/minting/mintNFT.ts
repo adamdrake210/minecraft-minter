@@ -49,7 +49,7 @@ export const mintNFT = async ({
   if (!pinataResponse.success) {
     return {
       success: false,
-      status: "😢 Something went wrong while uploading your tokenURI.",
+      status: "Something went wrong while uploading your tokenURI.",
     };
   }
   // @ts-ignore
@@ -77,7 +77,7 @@ export const mintNFT = async ({
     });
     return {
       success: true,
-      status: `Success! Check out your transaction on <a target="_blank" href="https://ropsten.etherscan.io/tx/${txHash}">Etherscan</a>`,
+      status: txHash,
     };
   } catch (error: any) {
     return {

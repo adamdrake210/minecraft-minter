@@ -9,12 +9,14 @@ import {
   ModalCloseButton,
   Button,
   Text,
+  Link,
 } from "@chakra-ui/react";
+import { MintingStatusType } from "pages/Homepage/Homepage";
 
 type MintingModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  mintingStatus: string;
+  mintingStatus: MintingStatusType | null;
 };
 
 export const MintingModal = ({
@@ -29,7 +31,23 @@ export const MintingModal = ({
         <ModalHeader>Minting Status</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>{mintingStatus}</Text>
+          {mintingStatus?.success ? (
+            <Text>
+              Success! Check out your transaction on{" "}
+              <Link
+                isExternal
+                textDecoration="underline"
+                fontWeight={700}
+                target="_blank"
+                rel="noreferrer"
+                href={`https://ropsten.etherscan.io/tx/${mintingStatus.status}`}
+              >
+                Etherscan
+              </Link>
+            </Text>
+          ) : (
+            <Text color="tomato">{mintingStatus?.status}</Text>
+          )}
         </ModalBody>
 
         <ModalFooter>
