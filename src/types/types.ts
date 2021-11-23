@@ -2,11 +2,11 @@ export type MineCraftSkinAttributes = {
   flexibility: number;
   toughness: number;
   power: number;
-}
+};
 
 export type MineCraftSkinNft = {
   name: string;
   description: string;
   image_url: string;
-  Attributes: MineCraftSkinAttributes;
-}
+  attributes: MineCraftSkinAttributes;
+};

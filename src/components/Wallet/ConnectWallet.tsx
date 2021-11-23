@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/button";
+import { Flex } from "@chakra-ui/layout";
 
 import { connectWallet } from "utils/wallets/connectWallet";
 import { getCurrentWalletConnected } from "utils/wallets/getCurrentWalletConnected";
@@ -17,7 +18,9 @@ export const ConnectWallet = () => {
     }
   };
 
-  function addWalletListener() {
+  const handleLogout = () => {};
+
+  const addWalletListener = () => {
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", (accounts: any[]) => {
         if (accounts.length > 0) {
@@ -31,7 +34,7 @@ export const ConnectWallet = () => {
     } else {
       // set modal to you must install metamask
     }
-  }
+  };
 
   useEffect(() => {
     async function getCurrentWallet() {
@@ -45,15 +48,20 @@ export const ConnectWallet = () => {
   }, []);
 
   return (
-    <Button id="walletButton" onClick={connectWalletPressed}>
-      {walletAddress.length > 0 ? (
-        "Connected: " +
-        String(walletAddress).substring(0, 6) +
-        "..." +
-        String(walletAddress).substring(38)
-      ) : (
-        <span>Connect Wallet</span>
-      )}
-    </Button>
+    <Flex>
+      <Button id="walletButton" onClick={connectWalletPressed}>
+        {walletAddress.length > 0 ? (
+          "Connected: " +
+          String(walletAddress).substring(0, 6) +
+          "..." +
+          String(walletAddress).substring(38)
+        ) : (
+          <span>Login</span>
+        )}
+      </Button>
+      {/* <Button variant="outline" ml={2} onClick={handleLogout}>
+        Logout
+      </Button> */}
+    </Flex>
   );
 };

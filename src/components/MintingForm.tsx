@@ -6,10 +6,28 @@ import { Button } from "@chakra-ui/react";
 
 import { MainPageLayout } from "layouts/MainPageLayout";
 import { InputField } from "./common/forms/InputField";
+import { mintNFT } from "utils/minting/mintNFT";
+
+type FormData = {
+  image_url: string;
+  name: string;
+  description: string;
+  flexibility: number;
+  toughness: number;
+  power: number;
+};
+
+type MintingFormProps = {
+  setMintingStatus: (arg: string) => void;
+  onOpen: () => void;
+};
 
 const schema = yup
   .object({
-    url: yup.string().url("This field must contain a valid URL").required(),
+    image_url: yup
+      .string()
+      .url("This field must contain a valid URL")
+      .required(),
     name: yup.string().min(4).required(),
     description: yup.string().min(4).required(),
     flexibility: yup.number().max(10).required(),
@@ -18,7 +36,7 @@ const schema = yup
   })
   .required();
 
-export const MintingForm = () => {
+export const MintingForm = ({ setMintingStatus, onOpen }: MintingFormProps) => {
   const {
     handleSubmit,
     register,
@@ -27,21 +45,38 @@ export const MintingForm = () => {
     resolver: yupResolver(schema),
   });
 
-  function onSubmit(values) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resolve();
-      }, 500);
-    });
+  async function onSubmit(values: FormData) {
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     alert(JSON.stringify(values, null, 2));
+    //     resolve();
+    //   }, 500);
+    // });
+    try {
+      const { status } = await mintNFT({
+        image_url: values.image_url,
+        name: values.name,
+        description: values.description,
+        attributes: {
+          flexibility: values.flexibility,
+          toughness: values.toughness,
+          power: values.power,
+        },
+      });
+      setMintingStatus(status);
+      onOpen();
+    } catch (error: any) {
+      setMintingStatus(error.message);
+      onOpen();
+    }
   }
 
   return (
     <MainPageLayout>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputField
-          name="url"
-          error={errors.url}
+          name="image_url"
+          error={errors.image_url}
           register={register}
           placeholder="e.g. https://gateway.pinata.cloud/ipfs/<hash>"
           type="text"
