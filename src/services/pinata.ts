@@ -43,7 +43,7 @@ export const pinList = async (nftName: string) => {
     .then(function (response) {
       return {
         success: true,
-        data: response.data,
+        data: response.data.rows,
       };
     })
     .catch(function (error) {
