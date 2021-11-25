@@ -69,11 +69,12 @@ export const Homepage = () => {
           You must be connected to the Ropsten Network to see this content.
         </Text>
       ) : (
-        <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-          {nfts?.data?.map((nft: any) => {
-            console.log("nft: ", nft);
-            return (
-              <>
+        <>
+          <Text mb={4}>Your Ether Balance: {walletInfo.balance}</Text>
+          <Grid templateColumns={["repeat(2, 1fr)", "repeat(4, 1fr)"]} gap={6}>
+            {nfts?.data?.map((nft: any) => {
+              console.log("nft: ", nft);
+              return (
                 <Link
                   key={nft.metadata.name}
                   to={`/nftdetails/${nft.ipfs_pin_hash}`}
@@ -89,11 +90,10 @@ export const Homepage = () => {
                     <Text>{nft.metadata.name}</Text>
                   </Flex>
                 </Link>
-                <Text>Your Ether Balance: {walletInfo.balance}</Text>
-              </>
-            );
-          })}
-        </Grid>
+              );
+            })}
+          </Grid>
+        </>
       )}
     </Grid>
   );
