@@ -1,5 +1,5 @@
 import { MineCraftSkinNft } from "../types/types";
-import axios from 'axios';
+import axios from "axios";
 
 const SECRET = process.env.REACT_APP_PINATA_SECRET;
 const KEY = process.env.REACT_APP_PINATA_KEY;
@@ -10,8 +10,8 @@ export const pinJSONToIPFS = async (JSONBody: MineCraftSkinNft) => {
   return axios
     .post(url, JSONBody, {
       headers: {
-        pinata_api_key: KEY || '',
-        pinata_secret_api_key: SECRET || '',
+        pinata_api_key: KEY || "",
+        pinata_secret_api_key: SECRET || "",
       },
     })
     .then(function (response: any) {
@@ -22,6 +22,53 @@ export const pinJSONToIPFS = async (JSONBody: MineCraftSkinNft) => {
       };
     })
     .catch(function (error: Error) {
+      console.log(error);
+      return {
+        success: false,
+        message: error.message,
+      };
+    });
+};
+
+export const pinList = async (nftName: string) => {
+  const url = `https://api.pinata.cloud/data/pinList?status=pinned&metadata[name]=${nftName}`;
+
+  return axios
+    .get(url, {
+      headers: {
+        pinata_api_key: KEY || "",
+        pinata_secret_api_key: SECRET || "",
+      },
+    })
+    .then(function (response) {
+      return {
+        success: true,
+        data: response.data,
+      };
+    })
+    .catch(function (error) {
+      //handle error here
+      console.log(error);
+      return {
+        success: false,
+        message: error.message,
+      };
+    });
+};
+
+export const getNFTMetaData = async (hash: string) => {
+  const url = `https://gateway.pinata.cloud/ipfs/${hash}`;
+
+  return axios
+    .get(url)
+    .then((response) => {
+      return {
+        success: true,
+        data: response.data,
+      };
+    })
+    .catch(function (error) {
+      //handle error here
       console.log(error);
       return {
         success: false,
