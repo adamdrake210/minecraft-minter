@@ -1,7 +1,8 @@
 import React from "react";
 import { useMatch } from "react-location";
-import { List, ListItem, ListIcon, Text, Flex, Image } from "@chakra-ui/react";
+import { List, ListItem, ListIcon, Text, Flex } from "@chakra-ui/react";
 import { MdCheckCircle } from "react-icons/md";
+import Skinview3d from "react-skinview3d";
 
 import { LocationGenerics } from "App";
 
@@ -17,13 +18,13 @@ export const NFTDetailsPage = () => {
           <Text fontSize="4xl" mb={4}>
             {nftDetails.data.name}
           </Text>
-          <Image
-            alignSelf="center"
-            src={nftDetails.data.image_url}
-            alt={`Image of ${nftDetails.data.name}`}
-            width={300}
-            height="auto"
-          />
+          <Flex justifyContent="center">
+            <Skinview3d
+              skinUrl={nftDetails.data.image_url}
+              height="500"
+              width="500"
+            />
+          </Flex>
 
           <Text fontSize="xl" my={4}>
             {nftDetails.data.description}
