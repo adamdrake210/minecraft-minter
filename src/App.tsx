@@ -2,6 +2,8 @@ import * as React from "react";
 import { ChakraProvider, Box, theme } from "@chakra-ui/react";
 import { ReactLocation, Router, Outlet, MakeGenerics } from "react-location";
 import { ReactLocationDevtools } from "react-location-devtools";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import { Homepage } from "./pages/Homepage/Homepage";
 import { Nav } from "components/Nav/Nav";
@@ -52,15 +54,20 @@ const routes = [
 // Set up a ReactLocation instance
 const location = new ReactLocation();
 
+const queryClient = new QueryClient();
+
 export const App = () => (
   <ChakraProvider theme={theme}>
-    {/* @ts-ignore */}
-    <Router location={location} routes={routes}>
-      <Box textAlign="center">
-        <Nav />
-        <Outlet />
-      </Box>
-      <ReactLocationDevtools initialIsOpen={false} />
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      {/* @ts-ignore */}
+      <Router location={location} routes={routes}>
+        <Box textAlign="center">
+          <Nav />
+          <Outlet />
+        </Box>
+        <ReactLocationDevtools initialIsOpen={false} />
+      </Router>
+      <ReactQueryDevtools initialIsOpen />
+    </QueryClientProvider>
   </ChakraProvider>
 );
