@@ -37,29 +37,6 @@ export const Homepage = () => {
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   async function detectChainId() {
-  //     const provider = await detectEthereumProvider();
-  //     if (provider) {
-  //       provider.on("chainChanged", async () => {
-  //         const addressArray = await provider.request({
-  //           method: "eth_requestAccounts",
-  //         });
-  //         const chainId = await provider.request({ method: "eth_chainId" });
-  //         setWalletInfo({ address: addressArray[0], chainId, status: true });
-  //       });
-  //       // window.ethereum.on("accountsChanged", async () => {
-  //       //   const addressArray = await provider.request({
-  //       //     method: "eth_requestAccounts",
-  //       //   });
-  //       //   const chainId = await provider.request({ method: "eth_chainId" });
-  //       //   setWalletInfo({ address: addressArray[0], chainId, status: true });
-  //       // });
-  //     }
-  //   }
-  //   detectChainId();
-  // }, []);
-
   console.log("walletInfo: ", walletInfo);
 
   return (

@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/button";
 import { Flex } from "@chakra-ui/layout";
 
 import { connectWallet } from "utils/wallets/connectWallet";
-import { getCurrentWalletConnected } from "utils/wallets/getCurrentWalletConnected";
+import { getCurrentWalletConnected } from "services/web3";
 
 declare let window: any;
 
@@ -38,7 +38,7 @@ export const ConnectWallet = () => {
     async function getCurrentWallet() {
       const wallet = await getCurrentWalletConnected();
       if (wallet) {
-        setWallet(wallet.address);
+        setWallet(wallet.account);
       }
       addWalletListener();
     }
