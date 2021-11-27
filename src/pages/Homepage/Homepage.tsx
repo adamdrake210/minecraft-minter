@@ -1,43 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Grid, Text, Flex } from "@chakra-ui/react";
 import { useMatch, Link } from "react-location";
-import Web3 from "web3";
-
-type WalletInfo = {
-  address: string;
-  balance?: string;
-  chainId: number;
-  status: boolean;
-};
-
-declare let window: any;
+import { useQuery } from "react-query";
+import { getCurrentWalletConnected } from "services/web3";
 
 export const Homepage = () => {
   const {
     data: { nfts },
   } = useMatch<any>();
-  const [walletInfo, setWalletInfo] = useState<WalletInfo | null>(null);
 
-  const web3 = new Web3(window.ethereum);
+  const {
+    isLoading,
+    error,
+    data: walletInfo,
+  } = useQuery("walletData", getCurrentWalletConnected);
 
-  useEffect(() => {
-    async function getWalletInfo() {
-      const chainId = await web3.eth.getChainId();
-      const addressArray = await web3.eth.getAccounts();
-      const balance = await web3.eth.getBalance(addressArray[0]);
+  if (isLoading) return "Loading...";
 
-      setWalletInfo({
-        address: addressArray[0],
-        balance: web3.utils.fromWei(balance),
-        chainId,
-        status: true,
-      });
-    }
-    getWalletInfo();
-    // eslint-disable-next-line
-  }, []);
-
-  console.log("walletInfo: ", walletInfo);
+  // @ts-ignore
+  if (error) return "An error has occurred: " + error.message;
 
   return (
     <Grid p={3}>
