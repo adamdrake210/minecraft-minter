@@ -44,8 +44,16 @@ export const mintNFT = async ({
   metadata.image_url = image_url;
   metadata.description = description;
   metadata.attributes = attributes;
+
+  const JSONBody = {
+    pinataMetadata: {
+      name: `minecraft_${name}`,
+    },
+    pinataContent: metadata,
+  };
+
   //make pinata call
-  const pinataResponse = await pinJSONToIPFS(metadata);
+  const pinataResponse = await pinJSONToIPFS(JSONBody);
   if (!pinataResponse.success) {
     return {
       success: false,

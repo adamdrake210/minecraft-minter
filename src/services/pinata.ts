@@ -4,7 +4,14 @@ import axios from "axios";
 const SECRET = process.env.REACT_APP_PINATA_SECRET;
 const KEY = process.env.REACT_APP_PINATA_KEY;
 
-export const pinJSONToIPFS = async (JSONBody: MineCraftSkinNft) => {
+type PinaataPinJsonToIPFSType = {
+  pinataMetadata: {
+    name: string;
+  };
+  pinataContent: MineCraftSkinNft;
+};
+
+export const pinJSONToIPFS = async (JSONBody: PinaataPinJsonToIPFSType) => {
   const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
   //making axios POST request to Pinata ⬇️
   return axios
