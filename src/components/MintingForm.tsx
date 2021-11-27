@@ -41,6 +41,7 @@ export const MintingForm = ({ setMintingStatus, onOpen }: MintingFormProps) => {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(schema),
@@ -59,6 +60,7 @@ export const MintingForm = ({ setMintingStatus, onOpen }: MintingFormProps) => {
         },
       });
       setMintingStatus(mintingResponse);
+      reset();
       onOpen();
     } catch (error: any) {
       setMintingStatus(error.message);
