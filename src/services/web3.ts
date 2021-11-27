@@ -17,7 +17,7 @@ export async function getCurrentWalletConnected() {
       web3,
       address: address || "",
       chainId: chainId || "",
-      balance: balance || "",
+      balance: web3.utils.fromWei(balance) || "",
     };
   } catch (error: any) {
     return {

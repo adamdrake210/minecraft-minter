@@ -31,7 +31,9 @@ export const Homepage = () => {
           </Text>
         ) : (
           <>
-            <Text mb={4}>Your Ether Balance: {walletInfo.balance}</Text>
+            <Text mb={4}>
+              Your Ether Balance: {parseFloat(walletInfo.balance).toFixed(3)}
+            </Text>
             <Grid
               templateColumns={["repeat(2, 1fr)", "repeat(4, 1fr)"]}
               gap={6}
