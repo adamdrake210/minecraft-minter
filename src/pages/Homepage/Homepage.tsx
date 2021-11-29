@@ -1,11 +1,12 @@
 import React from "react";
-import { Grid, Text, Flex } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 import { useMatch, Link } from "react-location";
 import { useQuery } from "react-query";
 
 import { getCurrentWalletConnected } from "services/web3";
 import Loader from "components/common/Loading";
 import { WalletInfoLocalType } from "components/Wallet/ConnectWallet";
+import { NFTSkinCard } from "components/NFTSkinCard";
 
 export const Homepage = () => {
   const {
@@ -46,15 +47,7 @@ export const Homepage = () => {
                     to={`/nftdetails/${nft.ipfs_pin_hash}`}
                     activeOptions={{ exact: true }}
                   >
-                    <Flex
-                      w="100%"
-                      bg="blue.500"
-                      p={3}
-                      justifyContent="center"
-                      direction="column"
-                    >
-                      <Text>{nft.metadata.name}</Text>
-                    </Flex>
+                    <NFTSkinCard nftDetails={nft} />
                   </Link>
                 );
               })}
