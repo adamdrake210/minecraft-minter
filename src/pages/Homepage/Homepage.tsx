@@ -27,7 +27,7 @@ export const Homepage = () => {
     <Loader error={error} isError={isError} isLoading={isFetching}>
       <Grid p={3}>
         {walletInfo?.chainId !== 3 ? (
-          <Text color="red">
+          <Text color="red" fontSize="3xl">
             You must be connected to the Ropsten Network to see this content.
           </Text>
         ) : (
