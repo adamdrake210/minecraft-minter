@@ -21,8 +21,8 @@ export const NFTDetailsPage = () => {
           <Flex justifyContent="center">
             <Skinview3d
               skinUrl={nftDetails.data.image_url}
-              height="500"
-              width="500"
+              height={500}
+              width={500}
             />
           </Flex>
 
